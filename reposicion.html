@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reposición de Alcohol</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f8;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .card {
+            background: white;
+            max-width: 400px;
+            margin: auto;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        button {
+            background-color: #d32f2f;
+            color: white;
+            font-size: 18px;
+            padding: 15px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        button:hover {
+            background-color: #b71c1c;
+        }
+
+        .info {
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="card">
+    <h2>Reposición de Alcohol</h2>
+
+    <p class="info">
+        Dispenser: <strong id="dispenserID"></strong>
+    </p>
+
+    <form id="formulario"
+          action="https://formsubmit.co/comite.infecciones.evitalanus@gmail.com"
+          method="POST">
+
+        <!-- Campo oculto con el ID del dispenser -->
+        <input type="hidden" name="Dispenser" id="inputDispenser">
+
+        <!-- Asunto del correo -->
+        <input type="hidden" name="_subject"
+               value="Solicitud de reposición de alcohol">
+
+        <!-- Evita captcha -->
+        <input type="hidden" name="_captcha" value="false">
+
+        <!-- Mensaje -->
+        <input type="hidden" name="Mensaje"
+               value="Se solicita reposición de alcohol.">
+
+        <button type="submit">
+            Solicitar reposición
+        </button>
+    </form>
+</div>
+
+<script>
+    // Obtener ID del dispenser desde la URL
+    const params = new URLSearchParams(window.location.search);
+    const dispenser = params.get("id") || "No identificado";
+
+    // Mostrarlo en pantalla
+    document.getElementById("dispenserID").innerText = dispenser;
+
+    // Enviarlo en el formulario
+    document.getElementById("inputDispenser").value = dispenser;
+</script>
+
+</body>
+</html>
