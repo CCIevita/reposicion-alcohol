@@ -1,93 +1,92 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <title>Reposición de Alcohol</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f6f8;
-            text-align: center;
-            padding: 40px;
-        }
+<html lang="es"> <head> <meta charset="UTF-8"> <title>Reposición de Alcohol</title> <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        .card {
-            background: white;
-            max-width: 400px;
-            margin: auto;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        }
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #eef2f5;
+        text-align: center;
+        padding: 30px;
+    }
 
-        button {
-            background-color: #d32f2f;
-            color: white;
-            font-size: 18px;
-            padding: 15px 25px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 100%;
-        }
+    .card {
+        background: white;
+        max-width: 420px;
+        margin: auto;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
 
-        button:hover {
-            background-color: #b71c1c;
-        }
+    .logo {
+        width: 120px;
+        margin-bottom: 15px;
+    }
 
-        .info {
-            margin-bottom: 20px;
-            font-size: 16px;
-        }
-    </style>
+    .habitacion {
+        font-size: 16px;
+        margin-bottom: 20px;
+        color: #333;
+    }
+
+    button {
+        background-color: #1e3a5f;
+        color: white;
+        font-size: 18px;
+        padding: 15px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 100%;
+    }
+
+    .mensaje {
+        display: none;
+        color: green;
+        font-weight: bold;
+        margin-top: 20px;
+    }
+</style>
+
 </head>
 
 <body>
 
 <div class="card">
-    <h2>Reposición de Alcohol</h2>
 
-    <p class="info">
-        Dispenser: <strong id="dispenserID"></strong>
-    </p>
+<!-- Logo -->
+<img src="logo.png" class="logo">
 
-    <form id="formulario"
-          action="https://formsubmit.co/comite.infecciones.evitalanus@gmail.com"
-          method="POST">
+<h2>Reposición de Alcohol</h2>
+<p>H.I.G.A. Evita - Lanús</p>
 
-        <!-- Campo oculto con el ID del dispenser -->
-        <input type="hidden" name="Dispenser" id="inputDispenser">
+<!-- Mostrar ID del dispenser / habitación -->
+<p class="habitacion">
+    Ubicación: <strong id="ubicacion"></strong>
+</p>
 
-        <!-- Asunto del correo -->
-        <input type="hidden" name="_subject"
-               value="Solicitud de reposición de alcohol">
+<form id="formulario" action="https://formsubmit.co/comite.infecciones.evitalanus@gmail.com" method="POST">
 
-        <!-- Evita captcha -->
-        <input type="hidden" name="_captcha" value="false">
+    <!-- ID oculto -->
+    <input type="hidden" name="Ubicacion" id="inputUbicacion">
 
-        <!-- Mensaje -->
-        <input type="hidden" name="Mensaje"
-               value="Se solicita reposición de alcohol.">
+    <input type="hidden" name="_subject" value="Reposición de alcohol en gel">
+    <input type="hidden" name="_captcha" value="false">
 
-        <button type="submit">
-            Solicitar reposición
-        </button>
-    </form>
+    <button type="submit">
+        Solicitar reposición
+    </button>
+
+</form>
+
+<!-- Mensaje de confirmación -->
+<div class="mensaje" id="mensajeConfirmacion">
+    ✅ Solicitud enviada correctamente
 </div>
 
-<script>
-    // Obtener ID del dispenser desde la URL
-    const params = new URLSearchParams(window.location.search);
-    const dispenser = params.get("id") || "No identificado";
+</div>
 
-    // Mostrarlo en pantalla
-    document.getElementById("dispenserID").innerText = dispenser;
+<script> // Leer ID desde QR (URL) const params = new URLSearchParams(window.location.search); const ubicacion = params.get("id") || "No especificada"; document.getElementById("ubicacion").innerText = ubicacion; document.getElementById("inputUbicacion").value = ubicacion; const form = document.getElementById("formulario"); const mensaje = document.getElementById("mensajeConfirmacion"); form.addEventListener("submit", function(event) { event.preventDefault(); fetch(form.action, { method: "POST", body: new FormData(form), }) .then(response => { form.style.display = "none"; mensaje.style.display = "block"; }) .catch(error => { alert("Error al enviar la solicitud"); }); }); </script>
 
-    // Enviarlo en el formulario
-    document.getElementById("inputDispenser").value = dispenser;
-</script>
-
-</body>
-</html>
+</body> </html>
