@@ -61,23 +61,30 @@
 <h2>Reposición de Alcohol</h2>
 <p>H.I.G.A. Evita - Lanús</p>
 
-<!-- Mostrar ID del dispenser / habitación -->
-<p class="habitacion">
-    Ubicación: <strong id="ubicacion"></strong>
-</p>
+ <p class="info">
+    Dispenser: <strong id="dispenserID"></strong>
+    </p>
 
 <form id="formulario" action="https://formsubmit.co/comite.infecciones.evitalanus@gmail.com" method="POST">
 
-    <!-- ID oculto -->
-    <input type="hidden" name="Ubicacion" id="inputUbicacion">
+  
+    <!-- Campo oculto con el ID del dispenser -->
+    <input type="hidden" name="Dispenser" id="inputDispenser">
 
-    <input type="hidden" name="_subject" value="Reposición de alcohol en gel">
+    <!-- Asunto del correo -->
+    <input type="hidden" name="_subject"
+           value="Solicitud de reposición de alcohol">
+
+    <!-- Evita captcha -->
     <input type="hidden" name="_captcha" value="false">
+
+    <!-- Mensaje -->
+    <input type="hidden" name="Mensaje"
+           value="Se solicita reposición de alcohol.">
 
     <button type="submit">
         Solicitar reposición
     </button>
-
 </form>
 
 <!-- Mensaje de confirmación -->
