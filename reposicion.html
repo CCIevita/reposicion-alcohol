@@ -65,45 +65,24 @@
     Dispenser: <strong id="dispenserID"></strong>
     </p>
 
-<form id="formulario" action="https://formsubmit.co/comite.infecciones.evitalanus@gmail.com" method="POST">
-
-  
-    <!-- Campo oculto con el ID del dispenser -->
-    <input type="hidden" name="Dispenser" id="inputDispenser">
-
-    <!-- Asunto del correo -->
-    <input type="hidden" name="_subject"
-           value="Solicitud de reposición de alcohol">
-
-    <!-- Evita captcha -->
-    <input type="hidden" name="_captcha" value="false">
-
-    <!-- Mensaje -->
-    <input type="hidden" name="Mensaje"
-           value="Se solicita reposición de alcohol.">
-
-    <button type="submit">
-        Solicitar reposición
-    </button>
-</form>
-
-<!-- Mensaje de confirmación -->
-<div class="mensaje" id="mensajeConfirmacion">
-    ✅ Solicitud enviada correctamente
-</div>
+<button onclick="enviarSolicitud()">
+    Solicitar reposición
+</button>
 
 <script>
-    // Obtener ID del dispenser desde la URL
+function enviarSolicitud() {
     const params = new URLSearchParams(window.location.search);
-    const dispenser = params.get("id") || "No identificado";
+    const ubicacion = params.get("id") || "No especificada";
 
-    // Mostrarlo en pantalla
-    document.getElementById("dispenserID").innerText = dispenser;
+    fetch(https://script.google.com/macros/s/AKfycbzpKTBSdnRYrXdkPv-ukfaDL32EYAA9Isqgxh7S1mzcCfb8-uNiNG7do_-GfhiWWw_F/exec, {
+        method: "POST",
+        body: JSON.stringify({
+            tipo: "Alcohol",
+            ubicacion: ubicacion
+        })
+    });
 
-    // Enviarlo en el formulario
-    document.getElementById("inputDispenser").value = dispenser;
+    document.getElementById("formulario").style.display = "none";
+    document.getElementById("mensajeConfirmacion").style.display = "block";
+}
 </script>
-
-</body>
-</html>
-</body> </html>
