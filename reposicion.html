@@ -61,28 +61,51 @@
 <h2>Reposición de Alcohol</h2>
 <p>H.I.G.A. Evita - Lanús</p>
 
- <p class="info">
-    Dispenser: <strong id="dispenserID"></strong>
+    <!-- Ubicación dinámica -->
+    <p class="ubicacion">
+        Ubicación: <strong id="ubicacionTexto"></strong>
     </p>
 
-<button onclick="enviarSolicitud()">
-    Solicitar reposición
-</button>
+    <!-- Botón -->
+    <div id="formulario">
+        <button onclick="enviarSolicitud()">
+            Solicitar reposición
+        </button>
+    </div>
+
+    <!-- Confirmación -->
+    <div class="mensaje" id="mensajeConfirmacion">
+        ✅ Solicitud enviada correctamente
+    </div>
+
+</div>
 
 <script>
-function enviarSolicitud() {
+    // Leer ID desde QR
     const params = new URLSearchParams(window.location.search);
     const ubicacion = params.get("id") || "No especificada";
 
-    fetch(https://script.google.com/macros/s/AKfycbzpKTBSdnRYrXdkPv-ukfaDL32EYAA9Isqgxh7S1mzcCfb8-uNiNG7do_-GfhiWWw_F/exec, {
-        method: "POST",
-        body: JSON.stringify({
-            tipo: "Alcohol",
-            ubicacion: ubicacion
-        })
-    });
+    document.getElementById("ubicacionTexto").innerText = ubicacion;
 
-    document.getElementById("formulario").style.display = "none";
-    document.getElementById("mensajeConfirmacion").style.display = "block";
-}
+    function enviarSolicitud() {
+
+        fetch("https://script.google.com/macros/s/AKfycbzpKTBSdnRYrXdkPv-ukfaDL32EYAA9Isqgxh7S1mzcCfb8-uNiNG7do_-GfhiWWw_F/exec, {
+            method: "POST",
+            body: JSON.stringify({
+                tipo: "Alcohol",
+                ubicacion: ubicacion
+            })
+        })
+        .then(() => {
+            document.getElementById("formulario").style.display = "none";
+            document.getElementById("mensajeConfirmacion").style.display = "block";
+        })
+        .catch(() => {
+            alert("Error al enviar la solicitud");
+        });
+
+    }
 </script>
+
+</body>
+</html>
